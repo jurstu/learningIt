@@ -9,6 +9,17 @@ class Rotation:
         self.pitch = 0
         self.yaw = 0
 
+    def rotatePoints(self, points, rotation):
+        OUT = [[0,0,0]] * len(points)
+        for i, p in enumerate(points):
+            rotatedPoint = np.dot(rotation, p)
+            OUT[i] = rotatedPoint
+        return OUT
+
+    def getRotationMatrixInverted(self):
+        R = self.getRotationMatrix()
+        return np.linalg.inv(R)
+
     def getRotationMatrix(self):
         # against Z axis
         rm = np.array([

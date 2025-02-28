@@ -94,24 +94,31 @@ class ThreeDeeView:
 if __name__ == "__main__":
     t = ThreeDeeView()
 
+    state = 0
+
     i = 0
     R = Rotation()
     while(1):
         
-        i += 1
+        i += 0.1
         R.pitch = np.deg2rad(i)
         #R.roll = np.deg2rad(i)
         #R.yaw = np.deg2rad(i)
         
-        fullRot = R.getRotationMatrix()
+        print(i)
 
-        IN = t.points.copy()
-        OUT = []
-        for p in IN:
-            rotatedPoint = np.dot(fullRot, p)
-            OUT.append(rotatedPoint)
+        R1 = R.getRotationMatrix()
+        R2 = R.getRotationMatrixInverted()
+        R_none = np.dot(R1, R2)
+        points = R.rotatePoints(t.points, R_none)
         
-        t.updateMine(OUT, t.edges)
+        #if(state == 0):
+        #    points = R.rotatePoints(t.points, R.getRotationMatrix())    
+        #else:
+            
+
+
+        t.updateMine(points, t.edges)
 
 
 
@@ -121,6 +128,10 @@ if __name__ == "__main__":
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.KEYDOWN:
+                if(event.key == pygame.K_SLASH):
+                    state = 1 - state
+                    print(state)
+
                 if event.key == pygame.K_LEFT:
                     t.angle_pitch -= 5
                 elif event.key == pygame.K_RIGHT:
