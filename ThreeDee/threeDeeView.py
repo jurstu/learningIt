@@ -47,11 +47,11 @@ class ThreeDeeView:
 
 
         glBegin(GL_LINES)
-        for edge in self.edges:
+        for edge in e:
             for vertex in edge:
                 
                 glColor3f(0.5, 1, 0.5)
-                glVertex3fv(self.points[vertex])
+                glVertex3fv(p[vertex])
             
         glEnd()
 
@@ -100,8 +100,8 @@ if __name__ == "__main__":
         
         i += 1
         R.pitch = np.deg2rad(i)
-        R.roll = np.deg2rad(i)
-        R.yaw = np.deg2rad(i)
+        #R.roll = np.deg2rad(i)
+        #R.yaw = np.deg2rad(i)
         
         fullRot = R.getRotationMatrix()
 

@@ -10,11 +10,11 @@ class Rotation:
         self.yaw = 0
 
     def getRotationMatrix(self):
-        # against Y axis
+        # against Z axis
         rm = np.array([
-            [ np.cos(self.roll), 0, np.sin(self.roll)],
-            [                 0, 1,                 0],
-            [-np.sin(self.roll), 0, np.cos(self.roll)]
+            [np.cos(self.roll), -np.sin(self.roll),                   0],
+            [np.sin(self.roll),  np.cos(self.roll),                   0],
+            [               0,                 0,                   1]
         ])
 
 
@@ -26,11 +26,11 @@ class Rotation:
         ])
 
 
-        # against Z axis
+        # against Y axis
         ym = np.array([
-            [np.cos(self.yaw), -np.sin(self.yaw),                   0],
-            [np.sin(self.yaw),  np.cos(self.yaw),                   0],
-            [               0,                 0,                   1]
+            [ np.cos(self.yaw), 0, np.sin(self.yaw)],
+            [                 0, 1,                 0],
+            [-np.sin(self.yaw), 0, np.cos(self.yaw)]
         ])
 
         FullRot = np.dot(np.dot(ym, pm), rm)
