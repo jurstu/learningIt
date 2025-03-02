@@ -92,7 +92,7 @@ class Odometry:
                 self.rotCumSum += rr
                 #print(t)
                 self.traCumSum += t[0]
-                print(self.traCumSum)
+                print(self.rotCumSum)
             except (KeyboardInterrupt):
                 self.run = 0
         else:
